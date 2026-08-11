@@ -103,9 +103,23 @@ initialization or Thompson sampling instead of epsilon-greedy.
 ```bash
 python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
-cp .env.example .env   # fill in GMAIL_ADDRESS / GMAIL_APP_PASSWORD
+cp .env.example .env   # fill in GMAIL_ADDRESS / GMAIL_APP_PASSWORD, see below
 python3 run_cycle.py data/sample_clinicians.csv
 ```
+
+`GMAIL_APP_PASSWORD` is a Gmail-generated app password, not the account
+login password -- SMTP rejects real account passwords outright. To get
+one for any Gmail account (a fresh throwaway address is fine, doesn't
+need to be your real one):
+1. myaccount.google.com -> Security -> turn on 2-Step Verification if it
+   isn't already on
+2. Search "App passwords" in the account search bar -> create one, any
+   name -> copy the 16-character code it shows
+3. Put the Gmail address in `GMAIL_ADDRESS` and that 16-character code
+   (spaces don't matter) in `GMAIL_APP_PASSWORD`
+
+That's the only credential the machine needs -- everything else runs
+with no external accounts or API keys.
 
 `GMAIL_APP_PASSWORD` is a Gmail-generated app password (not the account
 password) -- requires 2-Step Verification on the sending account.
